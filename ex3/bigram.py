@@ -1,5 +1,6 @@
 from collections import defaultdict, Counter
 import numpy as np
+from pseudo_word_mapper import map_to_pseudo_word
 
 def train_bigram(train_set, smoothing=False):
     # Transition probabilities
@@ -20,14 +21,10 @@ def train_bigram(train_set, smoothing=False):
     # Normalize probabilities with or without smoothing
     if not smoothing:
         # Without smoothing
-        transition_probs = {
-            prev_tag: {tag: count / sum(tags.values()) for tag, count in tags.items()}
-            for prev_tag, tags in transitions.items()
-        }
-        emission_probs = {
-            tag: {word: count / sum(words.values()) for word, count in words.items()}
-            for tag, words in emissions.items()
-        }
+        transition_probs = {prev_tag: {tag: count / sum(tags.values()) for tag, count in tags.items()} for
+                            prev_tag, tags in transitions.items()}
+        emission_probs = {tag: {word: count / sum(words.values()) for word, count in words.items()} for
+                          tag, words in emissions.items()}
     else:
         # Vocabulary: all unique words in the training set
         vocab = {word.lower() for sentence in train_set for word, _ in sentence}
@@ -102,5 +99,60 @@ def viterbi(test_set, transition_probs, emission_probs, unknown_tag="NN"):
 
         best_path.reverse()
         results.append([(words[i], tags[best_path[i]]) for i in range(n)])
+
+    return results
+
+def replace_low_frequency_words(train_set, threshold=5):
+    word_freq = Counter(word.lower() for sentence in train_set for word, _ in sentence)
+    low_freq_words = {word for word, freq in word_freq.items() if freq < threshold}
+
+    def replace_words(sentence):
+        return [(map_to_pseudo_word(word) if word.lower() in low_freq_words else word.lower(), tag) for
+                word, tag in sentence]
+
+    return [replace_words(sentence) for sentence in train_set]
+
+
+def train_bigram_with_pseudo_words(train_set, smoothing=False):
+    # Replace low-frequency words with pseudo-words
+    train_set = replace_low_frequency_words(train_set)
+    return train_bigram(train_set, smoothing=smoothing)
+
+def viterbi_with_pseudo_words(test_set, transition_probs, emission_probs):
+    results = []
+    tags = list(emission_probs.keys())
+
+    for sentence in test_set:
+        words = [map_to_pseudo_word(word.lower()) for word, _ in sentence]
+        n = len(words)
+
+        # Initialize DP table
+        dp = np.zeros((n, len(tags)))
+        bp = np.zeros((n, len(tags)), dtype=int)
+
+        # Initialization
+        for j, tag in enumerate(tags):
+            dp[0, j] = transition_probs.get("<START>", {}).get(tag, 0) * emission_probs.get(tag, {}).get(words[0], 1e-6)
+
+        # Recursion
+        for i in range(1, n):
+            for j, tag in enumerate(tags):
+                max_prob, max_idx = max(
+                    (dp[i - 1, k] * transition_probs.get(tags[k], {}).get(tag, 0) * emission_probs.get(tag, {}).get(words[i], 1e-6), k)
+                    for k in range(len(tags))
+                )
+                dp[i, j] = max_prob
+                bp[i, j] = max_idx
+
+        # Termination
+        max_prob, max_idx = max((dp[n - 1, j] * transition_probs.get(tags[j], {}).get("<END>", 0), j) for j in range(len(tags)))
+        best_path = [max_idx]
+
+        # Backtrack
+        for i in range(n - 1, 0, -1):
+            best_path.append(bp[i, best_path[-1]])
+
+        best_path.reverse()
+        results.append([(sentence[i][0], tags[best_path[i]]) for i in range(n)])
 
     return results
