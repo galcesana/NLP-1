@@ -14,8 +14,6 @@ split_index = int(0.9 * len(tagged_sentences))
 train_set = tagged_sentences[:split_index]
 test_set = tagged_sentences[split_index:]
 
-
-
 # (b)i Compute the most likely tag for each word
 tag_count = defaultdict(Counter)
 for sentence in train_set:
