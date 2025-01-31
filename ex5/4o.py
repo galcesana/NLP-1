@@ -8,9 +8,6 @@ import re
 
 # Load Spacy NLP model
 nlp = spacy.load("en_core_web_sm")
-key = "AIzaSyDYf0f1xJYYJ21C1gmVUkHreU3nuSjuRC0"
-# key = "AIzaSyBivK_LnpcSz8z3G76fjnMGeutVei9p_YU"
-# key = "AIzaSyDgL2a2SEGTfBl4mmEkt0upZQSLTorsIJA"
 
 # Set Gemini API key
 genai.configure(api_key=key)
