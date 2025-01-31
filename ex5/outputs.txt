@@ -1,0 +1,30 @@
+Page: Donald Trump
+Total POS-Based Triplets: 959
+Total Dependency-Based Triplets: 99
+Sample POS-Based Triplets: [('Floyd', 'removed of from', 'Lafayette'), ('Trump', 'polarized approved by of', 'Republicans'), ('Americans', 'go to came from', 'House'), ('Organization', 'of inflating gain from', 'Carroll'), ('Trump', 'dictated of of', 'Trump')]
+Sample Dependency-Based Triplets: [('Trump', 'posed at', 'Episcopal Church'), ('House', 'impeached', 'Trump'), ('Trump', 'withdrew from', 'Paris Agreement'), ('=', 'opened', 'Harrah'), ('Trump', 'agreed In', 'September')]
+--------------------------------------------------------------------------------
+Page: Ruth Bader Ginsburg
+Total POS-Based Triplets: 868
+Total Dependency-Based Triplets: 76
+Sample POS-Based Triplets: [('Wade', 'decided', 'Ginsburg'), ('Mentally', 'on of losing During with', 'Emily'), ('Carolina', 'of', 'Persons'), ('Project', 'on', 'International'), ('Hammer', 'as', 'Marty')]
+Sample Dependency-Based Triplets: [('Ginsburg', 'dissented in', 'Wagnon'), ('Opperman Foundation', 'established', 'Award'), ('Deadpool', 'considers for', '-'), ('Ginsburg', 'went In', 'January'), ('Ginsburg', 'called on', 'Congress')]
+--------------------------------------------------------------------------------
+Page: J. K. Rowling
+Total POS-Based Triplets: 739
+Total Dependency-Based Triplets: 53
+Sample POS-Based Triplets: [('Kloves', 'wrote for with', 'Rowling'), ('£', 'allowed move to in', 'Leith'), ('Potter', 'contribute revised in resemble of', 'Harry'), ('Quirrell', 'opposes', 'Snape'), ('School', 'in', 'Winterbourne')]
+Sample Dependency-Based Triplets: [('Forbes', 'named', 'Rowling'), ('Brown', 'published in', 'April'), ('Arantes', 'returned to', 'Portugal'), ('Arantes', 'arrived in', 'Scotland'), ('Emma Nicholson', 'founded with', 'MEP')]        
+--------------------------------------------------------------------------------
+Page: Donald Trump
+Total LLM-Based Triplets: 36
+Sample LLM-Based Triplets: [('Donald John Trump', 'previously served as the 45th', 'president from 2017 to 2021'), ('Republican Party', 'he is a member of the', 'political party'), ('New York City', 'Trump was born in', 'borough of Queens'), ('Jamaica Hospital', 'born at', 'Trump'), ('Fred Trump', 'is the son of', 'Trump')]
+--------------------------------------------------------------------------------
+Page: Ruth Bader Ginsburg
+Total LLM-Based Triplets: 36
+Sample LLM-Based Triplets: [('Joan Ruth Bader', 'is', 'American lawyer and jurist'), ('Joan Ruth Bader', 'was', 'associate justice of the Supreme Court of the United States'), ('Joan Ruth Bader', 'was', 'nominated by President Bill Clinton'), ('Joan Ruth Bader', 'replaced', 'Byron White'), ('Joan Ruth Bader', 'was', 'first Jewish woman')]
+--------------------------------------------------------------------------------
+Page: J. K. Rowling
+Total LLM-Based Triplets: 83
+Sample LLM-Based Triplets: [('Joanne Rowling', 'writes under the pen name', 'J. K. Rowling'), ('Joanne Rowling', 'also known as', 'Jo'), ('Joanne Rowling', 'married', 'Pete Rowling'), ('Anne Rowling', 'married', 'Pete Rowling'), ('David Gordon Rowling Murray', 'son of', 'Joanne Rowling')]
+--------------------------------------------------------------------------------
